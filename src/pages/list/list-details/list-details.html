@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{list.Header}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg" padding>
+    <div *ngIf="list" class="selection">
+         <h2 class="card-title">
+                   {{list.Header}}
+                </h2>
+        <div [innerHTML]="list.Content"></div>
+    </div>
+</ion-content>
