@@ -1,7 +1,6 @@
 import { Component , OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NavController,LoadingController,NavParams } from 'ionic-angular';
-import { ListService} from './../../services/list.service';
 import { EditorListProvider} from '../../providers/editor-list/editor-list';
 import { ListDetailsComponent} from './list-details/list-details';
 import {Deploy} from '@ionic/cloud-angular';
@@ -12,23 +11,17 @@ import {Deploy} from '@ionic/cloud-angular';
 })
 export class List implements OnInit{
 
-	searchQuery: string = '';
+	data:any;
 	items: any;
-	lists:any;
+	loading: any;
 	selectedItem:any;
-
-
-
 	searching: any = false;
 	searchTerm: string = '';
 	searchControl: FormControl;
-	newsData: any;
-	loading: any;
 
 
 	constructor(public navCtrl: NavController,
 		private editor:EditorListProvider,
-		private _list:ListService, 
 		public navParams: NavParams,
 		public deploy: Deploy,
 		public loadingCtrl: LoadingController) {
@@ -36,8 +29,8 @@ export class List implements OnInit{
 		this.loading = this.loadingCtrl.create({
 			content: `<ion-spinner ></ion-spinner>`
 		});
-
-		this.getdata();
+		this.items = [];
+		this.data  = [];
 		this.selectedItem = navParams.get('item'); 
 	}
 
@@ -46,6 +39,7 @@ export class List implements OnInit{
 		this.editor.getJsonData().subscribe(
 			result => {
 				this.items=result.data.data;
+				this.data = result.data.data;
 			},
 			err =>{
 				console.error("Error : "+err);
@@ -56,6 +50,13 @@ export class List implements OnInit{
 			);
 	}
 
+	doRefresh(refresher) {
+
+		this.items = this.data;
+		setTimeout(() => {
+			refresher.complete();
+		}, 2000);
+	}
 
 	itemSelected(event, item){
 		this.navCtrl.push(ListDetailsComponent,{
@@ -77,7 +78,7 @@ export class List implements OnInit{
 
 		this.setFilteredItems();
 
-		this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+		this.searchControl.valueChanges.debounceTime(400).subscribe(search => {
 
 			this.searching = false;
 			this.setFilteredItems();
@@ -90,15 +91,20 @@ export class List implements OnInit{
 	}
 
 	setFilteredItems() {
-
-		this.items = this.getAllProdcuts("search",this.searchTerm);
+		if(this.searchTerm != ''){
+			this.items = this.searchContent("search",this.searchTerm);
+		}else{
+			this.items = this.data;
+		}
 
 	}
 
-	getAllProdcuts(isFrom, searchText){
-		this.editor.getJsonData().subscribe((res) => {
-			this.items = res.data.data;
-			if(isFrom == 'search' && searchText > 3) {
+	searchContent(isFrom, searchText){
+		this.searching = true;
+		let q:any = {'data':searchText}
+		this.editor.search(q).subscribe((res) => {
+			this.items = res.data;
+			if(isFrom == 'search' && searchText != '') {
 				return this.items.filter((item) => {
 					return (item.Header.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
 				})
@@ -106,22 +112,11 @@ export class List implements OnInit{
 		}, (err) => {
 
 		},
-		()=> console.log('complete'));
-	}
-
-	getItems(ev: any) {
-		this.searching = true;
-		// set val to the value of the searchbar
-		let val = ev.target.value;
-
-		// if the value is an empty string don't filter the items
-		if (val && val.trim() != '') {
-			this.getAllProdcuts("search", val);
-		}
+		()=> {this.searching = false});
 	}
 
 	ngOnInit(){
-		
+		this.getdata();
 	}
 
 }

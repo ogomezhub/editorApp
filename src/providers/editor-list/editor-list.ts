@@ -1,12 +1,11 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import {List} from './editor-list';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
   @Injectable()
   export class EditorListProvider implements OnInit{
-  	items:List[];
+    headers = new Headers({'Content-Type':'application/json'});
   	constructor(public http: Http) {
 
   	} 
@@ -15,12 +14,17 @@ import 'rxjs/add/operator/map';
   		return this.http.get('http://editor2.appenberg.co.za/api/v1/content').map(res => res.json());
   	}
 
+    search(data){
+      return this.http.post('http://editor2.appenberg.co.za/api/v1/content/search',data,{headers:this.headers})
+            .map(res => res.json());
+    }
+
   	ngOnInit(){
   	}
 
   }
 
-  export interface List {
+  export interface IList {
   	ID:number;
   	Header:string;
   	Content:string;

@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { Manufacturer } from '../pages/manufacturer/manufacturer';
 import { ListDetailsComponent} from '../pages/list/list-details/list-details';
+import { ManufactureDetailsComponent} from '../pages/manufacturer/manufacture-details/manufacture-details';
 import { List } from '../pages/list/list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ContentPage} from '../pages/content/content';
@@ -16,11 +17,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
 import { EditorListProvider } from '../providers/editor-list/editor-list';
-import { ContentProvider } from '../providers/content/content';
+import { ManufactureProvider } from '../providers/manufacture/manufacture';
 
 const cloudSettings: CloudSettings = {
   'core': {
-    'app_id': 'c7eeadf7'
+    'app_id': 'c671d1d0'
   }
 };
 
@@ -32,7 +33,8 @@ const cloudSettings: CloudSettings = {
     List,
     TabsPage,
     ContentPage,
-    ListDetailsComponent
+    ListDetailsComponent,
+    ManufactureDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ const cloudSettings: CloudSettings = {
     List,
     TabsPage,
     ContentPage,
-    ListDetailsComponent
+    ListDetailsComponent,
+    ManufactureDetailsComponent
   ],
   providers: [
     StatusBar,
@@ -56,7 +59,7 @@ const cloudSettings: CloudSettings = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
     EditorListProvider,
-    ContentProvider
+    ManufactureProvider
   ]
 })
 export class AppModule {}
