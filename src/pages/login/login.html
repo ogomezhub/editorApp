@@ -1,0 +1,35 @@
+
+<ion-header>
+
+	<ion-navbar>
+		<ion-title class="text-center">&nbsp;</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content padding scroll="false" class="login-content">
+	<section class="login-container text-center">
+		<div class = "col button-row">
+			<button ion-button outline block round color="secondary" ><ion-icon name="logo-facebook" item-left></ion-icon>&nbsp;Login with Facebook</button>
+		</div>
+    <ion-list>
+      <ion-item>
+      <ion-label floating>Email</ion-label>
+        <ion-input type="text" value="" required email></ion-input>
+      </ion-item>
+
+      <ion-item>
+      <ion-label floating>Password</ion-label>
+        <ion-input type="password" required></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div padding>
+      <button ion-button color="secondary"  block round>Sign In</button>
+    </div>
+    <div class = "col">
+     <span>Don't have an account? </span><strong><a href="#" (click)="signup()">Sign up!</a></strong>
+   </div>            
+ </section>
+</ion-content>

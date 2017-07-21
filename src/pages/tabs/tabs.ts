@@ -9,9 +9,9 @@ import { ContentPage }from '../content/content';
 })
 export class TabsPage {
 
-  tab1Root = List;
+  tab3Root = List;
   tab2Root = Manufacturer;
-  tab3Root = ContentPage;
+  tab1Root = ContentPage;
 
   constructor() {
 

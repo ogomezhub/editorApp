@@ -5,6 +5,11 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
 
+/*pages Module*/
+import {LoginPageModule} from '../pages/login/login.module';
+import {SignupPageModule} from '../pages/signup/signup.module';
+
+
 import { AboutPage } from '../pages/about/about';
 import { Manufacturer } from '../pages/manufacturer/manufacturer';
 import { ListDetailsComponent} from '../pages/list/list-details/list-details';
@@ -39,8 +44,14 @@ const cloudSettings: CloudSettings = {
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
-    CloudModule.forRoot(cloudSettings)
+    IonicModule.forRoot(MyApp,{
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
+    }),
+    CloudModule.forRoot(cloudSettings),
+    LoginPageModule,
+    SignupPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

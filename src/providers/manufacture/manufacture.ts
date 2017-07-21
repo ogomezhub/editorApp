@@ -11,11 +11,11 @@ import 'rxjs/add/operator/map';
   	} 
 
   	getJsonData(){
-  		return this.http.get('http://editor2.appenberg.co.za/api/v1/forms/manufactures').map(res => res.json());
+  		return this.http.get('http://deveditor:8000/api/v1/forms/manufactures').map(res => res.json());
   	}
 
     search(data){
-      return this.http.post('http://editor2.appenberg.co.za/api/v1/forms/manufactures/search',data,{headers:this.headers})
+      return this.http.post('http://deveditor:8000/api/v1/forms/manufactures/search',data,{headers:this.headers})
             .map(res => res.json());
     }
 

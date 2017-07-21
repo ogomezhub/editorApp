@@ -1,0 +1,43 @@
+page-login {
+	/*
+		#3b78e2	
+		#0E64F6
+	 */
+	
+	.toolbar-background{
+		background-color: #333333;
+		font-famyly:"Freight Sans";
+	}
+	
+	.text-center{
+		text-align:center;
+	}
+
+	.toolbar-title{
+	 color:#fff;
+	}
+
+	.login-content{
+	background: #3cbf5e;
+	}
+
+	.login-container {
+	display: -webkit-flex;
+	-webkit-flex-direction: column;
+	height: 100%;
+	background: #3cbf5e;
+	}
+
+	.login-container > .button-row img {
+	max-width: 80%;
+	}
+	.button-outline{
+		color:#fff;
+	}
+
+	.button-md{
+		text-transform:none;
+		font-weight:0;
+	}
+
+}
