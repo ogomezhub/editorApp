@@ -23,10 +23,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
 import { EditorListProvider } from '../providers/editor-list/editor-list';
 import { ManufactureProvider } from '../providers/manufacture/manufacture';
+import { AuthProvider } from '../providers/auth/auth';
+import { AuthGuard } from '../providers/auth/auth.guard';
+import { HelperProvider } from '../providers/helper/helper';
 
 const cloudSettings: CloudSettings = {
   'core': {
-    'app_id': 'c671d1d0'
+    'app_id': '362d5405'
   }
 };
 
@@ -70,7 +73,10 @@ const cloudSettings: CloudSettings = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
     EditorListProvider,
-    ManufactureProvider
+    ManufactureProvider,
+    AuthProvider,
+    AuthGuard,
+    HelperProvider
   ]
 })
 export class AppModule {}

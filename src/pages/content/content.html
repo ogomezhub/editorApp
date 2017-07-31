@@ -1,18 +1,62 @@
-<!--
-  Generated template for the ContentPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>content</ion-title>
+    <ion-title>Settings</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+<ion-card>
+ <ion-item>
+    <ion-avatar item-start>
+      <ion-icon name="contact"></ion-icon>
+    </ion-avatar>
+    <h2 *ngIf="profile">{{profile.first_name + ' '+profile.last_name}}</h2>
+    <p>November 5, 1955</p>
+  </ion-item>
 
+  <ion-card-content>
+    <!-- Add card content here! -->
+  </ion-card-content>
+</ion-card>
+
+<ion-card *ngIf="profile">
+  <ion-card-header color="primary">
+    My Details
+  </ion-card-header>
+
+  <ion-list>
+    <button ion-item>
+      <ion-icon name="mail"></ion-icon>
+      {{profile.email}}
+    </button>
+
+    <button ion-item>
+      <ion-icon name="call"></ion-icon>
+      {{profile.mobile}}
+    </button>
+
+    <button ion-item>
+      <ion-icon name="calendar"></ion-icon>
+     {{profile.dob}}
+    </button>
+
+    <button ion-item *ngIf="profile.sex">
+      <ion-icon name="man"></ion-icon> 
+      {{profile.sex.sex}}
+    </button>
+    
+  </ion-list>
+</ion-card>
+<ion-card>
+  <ion-list>
+    <button ion-item (click)="logout()">
+      <ion-icon name="power"></ion-icon>
+      Logout
+    </button>
+  </ion-list>
+</ion-card>
 </ion-content>

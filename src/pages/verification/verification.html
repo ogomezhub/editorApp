@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			SignUp
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding scroll="false">
+	
+	<ion-list>
+		<form [formGroup]="verificationForm" (ngSubmit)="submitVerification($event, verificationForm.value)">
+			<div *ngIf="msg" class="text-center">
+				<p>{{msg}}</p></div>
+				<ion-item>
+					<ion-label floating>OTP</ion-label>
+					<ion-input type="number" required formControlName="otp"></ion-input>
+				</ion-item>
+				<ion-item>
+					<button type="submit" [disabled]="!verificationForm.valid" ion-button color="secondary" block round color="primary">{{verify}}<ion-spinner *ngIf="loading"></ion-spinner></button>
+				</ion-item>
+			</form>
+		</ion-list>
+		<div class = "col-12">
+			
+			<p class="text-center">&copy; MiDgitalLife 2017</p>
+		</div>
+	</ion-content>

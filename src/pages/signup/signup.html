@@ -11,85 +11,86 @@
 <ion-content padding scroll="false">
 	
 	<ion-slides #signupSlider>
-		<ion-slide>
-			<ion-list>
-				<ion-item>
-					<div class = "col button-row">
-						<button ion-button outline block round><ion-icon name="logo-facebook" item-left></ion-icon>&nbsp;Signup with Facebook</button>
-					</div>
-				</ion-item>
-				<form [formGroup]="slideOneForm">
+
+		<form [formGroup]="personDetails">
+			<ion-slide>
+				<ion-list>
+					<ion-item>
+						<div class = "col button-row">
+							<button ion-button outline block round><ion-icon name="logo-facebook" item-left></ion-icon>&nbsp;Signup with Facebook</button>
+						</div>
+					</ion-item>
 					<ion-item>
 						<ion-label floating>First Name</ion-label>
-						<ion-input type="text" value="" required email formControlName="firstName"></ion-input>
+						<ion-input type="text" value="" required formControlName="first_name"></ion-input>
 					</ion-item>
 
 					<ion-item>
 						<ion-label floating>Last Name</ion-label>
-						<ion-input type="text" required formControlName="lastName"></ion-input>
+						<ion-input type="text" required formControlName="last_name"></ion-input>
 					</ion-item>
 
 					<ion-item>
 						<ion-label floating>Date of Birth</ion-label>
-						<ion-datetime displayFormat="DD/MM/YYYY" formControlName="dob"></ion-datetime>
+						<ion-datetime displayFormat="YYYY-MM-DD" formControlName="dob"></ion-datetime>
 					</ion-item>
 					<ion-item>
 						<ion-label floating>Gender</ion-label>
-						<ion-select>
-							<ion-option value="male" checked="true">Male</ion-option>
-							<ion-option value="female">Female</ion-option>
+						<ion-select formControlName="gender_uuid">
+							<ion-option *ngFor="let item of gender" value="{{item.uuid}}" checked="true">{{item.sex}}</ion-option>
 						</ion-select>
 					</ion-item>
 
 					<div padding>
-						<button ion-button color="secondary" block round  (click)="next()">NEXT <ion-icon name="arrow-forward"></ion-icon></button>
+						<button [disabled]="!personDetails.valid" ion-button color="secondary" block round  (click)="next()">NEXT <ion-icon name="arrow-forward"></ion-icon></button>
 					</div>
-				</form>
-			</ion-list>
-		</ion-slide>
+				</ion-list>
+			</ion-slide>
+		</form>
+		<form [formGroup]="loginDetails">
+			<ion-slide>
+				<br />        
+				<ion-list>
 
-		<ion-slide>
-			<br />        
-			<ion-list>
-
-				<form [formGroup]="slideTwoForm">
 					<ion-item>
 						<ion-label floating>Phone</ion-label>
-						<ion-input type="text" value="" required email formControlName="firstName"></ion-input>
+						<ion-input type="text" required formControlName="phone"></ion-input>
 					</ion-item>
 
 					<ion-item>
 						<ion-label floating>Email</ion-label>
-						<ion-input type="text" required formControlName="lastName"></ion-input>
+						<ion-input type="text" required formControlName="email"></ion-input>
 					</ion-item>
 					<ion-item>
 						<ion-label floating>Password</ion-label>
-						<ion-input type="password" required formControlName="lastName"></ion-input>
+						<ion-input type="password" required formControlName="password"></ion-input>
 					</ion-item>
 					
-					<ion-grid color="light">
-						<ion-row>
-							<ion-col class="col-4">
-								<ion-buttons start>
-									<button ion-button color="secondary" block round icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Back</button>
-								</ion-buttons>
-							</ion-col>
-							<ion-col class="col-8">
-								<ion-buttons end>
-									<button ion-button color="secondary" block round color="primary" (click)="save()">Submit</button>
-								</ion-buttons>
-							</ion-col>
-						</ion-row>
-					</ion-grid>
-				</form>
+					<ion-item>
+						<ion-grid color="light">
+							<ion-row>
+								<ion-col class="col-4">
+									<ion-buttons start>
+										<button ion-button color="secondary" block round icon-left (click)="prev()"><ion-icon name="arrow-back"></ion-icon> Back</button>
+									</ion-buttons>
+								</ion-col>
+								<ion-col class="col-8">
+									<ion-buttons end>
+										<button type="submit" [disabled]="!loginDetails.valid" ion-button color="secondary" block round color="primary" (click)="submitSignup()">{{signup}}<ion-spinner *ngIf="loading"></ion-spinner></button>
+									</ion-buttons>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</ion-item>
 
-			</ion-list>
+				</ion-list>
+			</ion-slide>
+			</form>
+	</ion-slides>
+	<div class="col-12">
+		<span>Already have an account? </span><strong><a href="#" (click)="login()">Login here!</a></strong>
 
-
-
-		</ion-slide>
 		<hr>
 		<p class="text-center">&copy; MiDgitalLife 2017</p>
-
-	</ion-slides>
+	</div> 
 </ion-content>

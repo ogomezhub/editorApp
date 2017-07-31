@@ -38,8 +38,8 @@ export class Manufacturer implements OnInit{
 		this.loading.present();
 		this.manufacture.getJsonData().subscribe(
 			result => {
-				this.items=result.data.data;
-				this.data = result.data.data;
+				this.items=result.data;
+				this.data = result.data;
 			},
 			err =>{
 				console.error("Error : "+err);
@@ -103,7 +103,7 @@ export class Manufacturer implements OnInit{
 		this.searching = true;
 		let q:any = {'data':searchText}
 		this.manufacture.search(q).subscribe((res) => {
-			this.items = res.data;
+			this.items = res;
 			if(isFrom == 'search' && searchText != '') {
 				return this.items.filter((item) => {
 					return (item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1);
